@@ -1,0 +1,112 @@
+<!-- resources > static > index.html -->
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Spring Boot - Vue</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+<script src="vue/vue.js"></script>
+<script>
+	var app;
+	var app2;
+	
+	window.onload = function() {
+		app = new Vue({
+			el : '#app',
+			data : {
+				message : '안녕하세요 Vue!'
+			}
+		});
+		
+		app2 = new Vue({
+			el : '#app2',
+			data : {
+				message : '이 페이지는 ' + new Date() + ' 에 로드 되었습니다.'
+			}
+		})
+	};
+	
+		
+</script> 
+</head>
+<body>
+    Hello! This is my Welcome Page!
+    <br>
+    <div id="app">
+    	{{ message }}
+    </div>
+    <div id="app2">
+    	<span v-bind:title="message">
+    		내 위에 잠시 마우스를 올리면 동적으로 바인딩 된 title을 볼수 있음
+    	</span>
+    </div>
+    <br>
+    <div id="app3">
+    	<p v-if="seen">이제 나를 볼 수 있어요</p>
+    </div>
+    <script>
+    	var app3 = new Vue({
+			el: '#app3',
+			data: {
+				seen: true
+			}
+		});
+    </script>
+    <br>
+    <div id="app6">
+    	<p>{{ message }}</p>
+    	<input v-model="message">
+    </div>
+    <script>
+    	var app6 = new Vue({
+			el: '#app6',
+			data: {
+				message: 'input value test'
+			}
+		});
+    </script>
+    <br>
+    
+    <div id="templet_test">
+    <ol>
+    	<todo-item
+    		v-for="item in MyGameList"
+    		v-bind:todo="item"
+    		v-bind:key="item.id"
+    	></todo-item>
+    </ol>
+    </div>
+    <script>
+    	Vue.component('todo-item',{
+			props:['todo'],
+			template: '<li>{{ todo.text }}</li>'
+		});
+		
+		var templetTest = new Vue({
+			el: '#templet_test',
+			data: {
+				MyGameList: [
+					{ id: 0, text: 'HearthStone' },
+					{ id: 1, text: 'AFK Arena' },
+					{ id: 2, text: 'CartRider' }
+				]
+			}
+		});
+		
+    </script>
+    <ul id="example1">
+    	<li v-for="item in items">{{ item.message }}</li>
+    </ul>
+    <script>
+    	var example1 = new Vue({
+			el: '#example1',
+			data: {
+				items: [
+					{ message: 'Foo' },
+					{ message: 'Bar' }
+				]
+			}
+		});
+    </script>
+    
+</body> 
+</html>
